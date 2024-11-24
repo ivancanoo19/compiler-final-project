@@ -1,0 +1,577 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statements
+Rule 2     statements -> statements statement
+Rule 3     statements -> statement
+Rule 4     statement -> INT IDENTIFIER SEMICOLON
+Rule 5     statement -> INT IDENTIFIER EQUALS expression SEMICOLON
+Rule 6     statement -> IDENTIFIER EQUALS expression SEMICOLON
+Rule 7     statement -> IF LPAREN condition RPAREN block
+Rule 8     statement -> IF LPAREN condition RPAREN block ELSE block
+Rule 9     condition -> expression LT expression
+Rule 10    block -> LBRACE statements RBRACE
+Rule 11    expression -> expression PLUS expression
+Rule 12    expression -> expression MINUS expression
+Rule 13    expression -> expression TIMES expression
+Rule 14    expression -> expression DIVIDE expression
+Rule 15    expression -> NUMBER
+Rule 16    expression -> IDENTIFIER
+
+Terminals, with rules where they appear
+
+DIVIDE               : 14
+ELSE                 : 8
+EQUALS               : 5 6
+IDENTIFIER           : 4 5 6 16
+IF                   : 7 8
+INT                  : 4 5
+LBRACE               : 10
+LPAREN               : 7 8
+LT                   : 9
+MINUS                : 12
+NUMBER               : 15
+PLUS                 : 11
+RBRACE               : 10
+RPAREN               : 7 8
+SEMICOLON            : 4 5 6
+TIMES                : 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+block                : 7 8 8
+condition            : 7 8
+expression           : 5 6 9 9 11 11 12 12 13 13 14 14
+program              : 0
+statement            : 2 3
+statements           : 1 2 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statements
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . INT IDENTIFIER SEMICOLON
+    (5) statement -> . INT IDENTIFIER EQUALS expression SEMICOLON
+    (6) statement -> . IDENTIFIER EQUALS expression SEMICOLON
+    (7) statement -> . IF LPAREN condition RPAREN block
+    (8) statement -> . IF LPAREN condition RPAREN block ELSE block
+
+    INT             shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+    IF              shift and go to state 6
+
+    program                        shift and go to state 1
+    statements                     shift and go to state 2
+    statement                      shift and go to state 3
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statements .
+    (2) statements -> statements . statement
+    (4) statement -> . INT IDENTIFIER SEMICOLON
+    (5) statement -> . INT IDENTIFIER EQUALS expression SEMICOLON
+    (6) statement -> . IDENTIFIER EQUALS expression SEMICOLON
+    (7) statement -> . IF LPAREN condition RPAREN block
+    (8) statement -> . IF LPAREN condition RPAREN block ELSE block
+
+    $end            reduce using rule 1 (program -> statements .)
+    INT             shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+    IF              shift and go to state 6
+
+    statement                      shift and go to state 7
+
+state 3
+
+    (3) statements -> statement .
+
+    INT             reduce using rule 3 (statements -> statement .)
+    IDENTIFIER      reduce using rule 3 (statements -> statement .)
+    IF              reduce using rule 3 (statements -> statement .)
+    $end            reduce using rule 3 (statements -> statement .)
+    RBRACE          reduce using rule 3 (statements -> statement .)
+
+
+state 4
+
+    (4) statement -> INT . IDENTIFIER SEMICOLON
+    (5) statement -> INT . IDENTIFIER EQUALS expression SEMICOLON
+
+    IDENTIFIER      shift and go to state 8
+
+
+state 5
+
+    (6) statement -> IDENTIFIER . EQUALS expression SEMICOLON
+
+    EQUALS          shift and go to state 9
+
+
+state 6
+
+    (7) statement -> IF . LPAREN condition RPAREN block
+    (8) statement -> IF . LPAREN condition RPAREN block ELSE block
+
+    LPAREN          shift and go to state 10
+
+
+state 7
+
+    (2) statements -> statements statement .
+
+    INT             reduce using rule 2 (statements -> statements statement .)
+    IDENTIFIER      reduce using rule 2 (statements -> statements statement .)
+    IF              reduce using rule 2 (statements -> statements statement .)
+    $end            reduce using rule 2 (statements -> statements statement .)
+    RBRACE          reduce using rule 2 (statements -> statements statement .)
+
+
+state 8
+
+    (4) statement -> INT IDENTIFIER . SEMICOLON
+    (5) statement -> INT IDENTIFIER . EQUALS expression SEMICOLON
+
+    SEMICOLON       shift and go to state 11
+    EQUALS          shift and go to state 12
+
+
+state 9
+
+    (6) statement -> IDENTIFIER EQUALS . expression SEMICOLON
+    (11) expression -> . expression PLUS expression
+    (12) expression -> . expression MINUS expression
+    (13) expression -> . expression TIMES expression
+    (14) expression -> . expression DIVIDE expression
+    (15) expression -> . NUMBER
+    (16) expression -> . IDENTIFIER
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 14
+
+state 10
+
+    (7) statement -> IF LPAREN . condition RPAREN block
+    (8) statement -> IF LPAREN . condition RPAREN block ELSE block
+    (9) condition -> . expression LT expression
+    (11) expression -> . expression PLUS expression
+    (12) expression -> . expression MINUS expression
+    (13) expression -> . expression TIMES expression
+    (14) expression -> . expression DIVIDE expression
+    (15) expression -> . NUMBER
+    (16) expression -> . IDENTIFIER
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 13
+
+    condition                      shift and go to state 16
+    expression                     shift and go to state 17
+
+state 11
+
+    (4) statement -> INT IDENTIFIER SEMICOLON .
+
+    INT             reduce using rule 4 (statement -> INT IDENTIFIER SEMICOLON .)
+    IDENTIFIER      reduce using rule 4 (statement -> INT IDENTIFIER SEMICOLON .)
+    IF              reduce using rule 4 (statement -> INT IDENTIFIER SEMICOLON .)
+    $end            reduce using rule 4 (statement -> INT IDENTIFIER SEMICOLON .)
+    RBRACE          reduce using rule 4 (statement -> INT IDENTIFIER SEMICOLON .)
+
+
+state 12
+
+    (5) statement -> INT IDENTIFIER EQUALS . expression SEMICOLON
+    (11) expression -> . expression PLUS expression
+    (12) expression -> . expression MINUS expression
+    (13) expression -> . expression TIMES expression
+    (14) expression -> . expression DIVIDE expression
+    (15) expression -> . NUMBER
+    (16) expression -> . IDENTIFIER
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 18
+
+state 13
+
+    (16) expression -> IDENTIFIER .
+
+    SEMICOLON       reduce using rule 16 (expression -> IDENTIFIER .)
+    PLUS            reduce using rule 16 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 16 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 16 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 16 (expression -> IDENTIFIER .)
+    LT              reduce using rule 16 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 16 (expression -> IDENTIFIER .)
+
+
+state 14
+
+    (6) statement -> IDENTIFIER EQUALS expression . SEMICOLON
+    (11) expression -> expression . PLUS expression
+    (12) expression -> expression . MINUS expression
+    (13) expression -> expression . TIMES expression
+    (14) expression -> expression . DIVIDE expression
+
+    SEMICOLON       shift and go to state 19
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+
+
+state 15
+
+    (15) expression -> NUMBER .
+
+    SEMICOLON       reduce using rule 15 (expression -> NUMBER .)
+    PLUS            reduce using rule 15 (expression -> NUMBER .)
+    MINUS           reduce using rule 15 (expression -> NUMBER .)
+    TIMES           reduce using rule 15 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 15 (expression -> NUMBER .)
+    LT              reduce using rule 15 (expression -> NUMBER .)
+    RPAREN          reduce using rule 15 (expression -> NUMBER .)
+
+
+state 16
+
+    (7) statement -> IF LPAREN condition . RPAREN block
+    (8) statement -> IF LPAREN condition . RPAREN block ELSE block
+
+    RPAREN          shift and go to state 24
+
+
+state 17
+
+    (9) condition -> expression . LT expression
+    (11) expression -> expression . PLUS expression
+    (12) expression -> expression . MINUS expression
+    (13) expression -> expression . TIMES expression
+    (14) expression -> expression . DIVIDE expression
+
+    LT              shift and go to state 25
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+
+
+state 18
+
+    (5) statement -> INT IDENTIFIER EQUALS expression . SEMICOLON
+    (11) expression -> expression . PLUS expression
+    (12) expression -> expression . MINUS expression
+    (13) expression -> expression . TIMES expression
+    (14) expression -> expression . DIVIDE expression
+
+    SEMICOLON       shift and go to state 26
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+
+
+state 19
+
+    (6) statement -> IDENTIFIER EQUALS expression SEMICOLON .
+
+    INT             reduce using rule 6 (statement -> IDENTIFIER EQUALS expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 6 (statement -> IDENTIFIER EQUALS expression SEMICOLON .)
+    IF              reduce using rule 6 (statement -> IDENTIFIER EQUALS expression SEMICOLON .)
+    $end            reduce using rule 6 (statement -> IDENTIFIER EQUALS expression SEMICOLON .)
+    RBRACE          reduce using rule 6 (statement -> IDENTIFIER EQUALS expression SEMICOLON .)
+
+
+state 20
+
+    (11) expression -> expression PLUS . expression
+    (11) expression -> . expression PLUS expression
+    (12) expression -> . expression MINUS expression
+    (13) expression -> . expression TIMES expression
+    (14) expression -> . expression DIVIDE expression
+    (15) expression -> . NUMBER
+    (16) expression -> . IDENTIFIER
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 27
+
+state 21
+
+    (12) expression -> expression MINUS . expression
+    (11) expression -> . expression PLUS expression
+    (12) expression -> . expression MINUS expression
+    (13) expression -> . expression TIMES expression
+    (14) expression -> . expression DIVIDE expression
+    (15) expression -> . NUMBER
+    (16) expression -> . IDENTIFIER
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 28
+
+state 22
+
+    (13) expression -> expression TIMES . expression
+    (11) expression -> . expression PLUS expression
+    (12) expression -> . expression MINUS expression
+    (13) expression -> . expression TIMES expression
+    (14) expression -> . expression DIVIDE expression
+    (15) expression -> . NUMBER
+    (16) expression -> . IDENTIFIER
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 29
+
+state 23
+
+    (14) expression -> expression DIVIDE . expression
+    (11) expression -> . expression PLUS expression
+    (12) expression -> . expression MINUS expression
+    (13) expression -> . expression TIMES expression
+    (14) expression -> . expression DIVIDE expression
+    (15) expression -> . NUMBER
+    (16) expression -> . IDENTIFIER
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 30
+
+state 24
+
+    (7) statement -> IF LPAREN condition RPAREN . block
+    (8) statement -> IF LPAREN condition RPAREN . block ELSE block
+    (10) block -> . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 32
+
+    block                          shift and go to state 31
+
+state 25
+
+    (9) condition -> expression LT . expression
+    (11) expression -> . expression PLUS expression
+    (12) expression -> . expression MINUS expression
+    (13) expression -> . expression TIMES expression
+    (14) expression -> . expression DIVIDE expression
+    (15) expression -> . NUMBER
+    (16) expression -> . IDENTIFIER
+
+    NUMBER          shift and go to state 15
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 33
+
+state 26
+
+    (5) statement -> INT IDENTIFIER EQUALS expression SEMICOLON .
+
+    INT             reduce using rule 5 (statement -> INT IDENTIFIER EQUALS expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 5 (statement -> INT IDENTIFIER EQUALS expression SEMICOLON .)
+    IF              reduce using rule 5 (statement -> INT IDENTIFIER EQUALS expression SEMICOLON .)
+    $end            reduce using rule 5 (statement -> INT IDENTIFIER EQUALS expression SEMICOLON .)
+    RBRACE          reduce using rule 5 (statement -> INT IDENTIFIER EQUALS expression SEMICOLON .)
+
+
+state 27
+
+    (11) expression -> expression PLUS expression .
+    (11) expression -> expression . PLUS expression
+    (12) expression -> expression . MINUS expression
+    (13) expression -> expression . TIMES expression
+    (14) expression -> expression . DIVIDE expression
+
+    SEMICOLON       reduce using rule 11 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 11 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 11 (expression -> expression PLUS expression .)
+    LT              reduce using rule 11 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 11 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+
+  ! TIMES           [ reduce using rule 11 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 11 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+
+
+state 28
+
+    (12) expression -> expression MINUS expression .
+    (11) expression -> expression . PLUS expression
+    (12) expression -> expression . MINUS expression
+    (13) expression -> expression . TIMES expression
+    (14) expression -> expression . DIVIDE expression
+
+    SEMICOLON       reduce using rule 12 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 12 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 12 (expression -> expression MINUS expression .)
+    LT              reduce using rule 12 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 12 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+
+  ! TIMES           [ reduce using rule 12 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 12 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+
+
+state 29
+
+    (13) expression -> expression TIMES expression .
+    (11) expression -> expression . PLUS expression
+    (12) expression -> expression . MINUS expression
+    (13) expression -> expression . TIMES expression
+    (14) expression -> expression . DIVIDE expression
+
+    SEMICOLON       reduce using rule 13 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 13 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 13 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 13 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 13 (expression -> expression TIMES expression .)
+    LT              reduce using rule 13 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 13 (expression -> expression TIMES expression .)
+
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! TIMES           [ shift and go to state 22 ]
+  ! DIVIDE          [ shift and go to state 23 ]
+
+
+state 30
+
+    (14) expression -> expression DIVIDE expression .
+    (11) expression -> expression . PLUS expression
+    (12) expression -> expression . MINUS expression
+    (13) expression -> expression . TIMES expression
+    (14) expression -> expression . DIVIDE expression
+
+    SEMICOLON       reduce using rule 14 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 14 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 14 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 14 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 14 (expression -> expression DIVIDE expression .)
+    LT              reduce using rule 14 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 14 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 20 ]
+  ! MINUS           [ shift and go to state 21 ]
+  ! TIMES           [ shift and go to state 22 ]
+  ! DIVIDE          [ shift and go to state 23 ]
+
+
+state 31
+
+    (7) statement -> IF LPAREN condition RPAREN block .
+    (8) statement -> IF LPAREN condition RPAREN block . ELSE block
+
+    INT             reduce using rule 7 (statement -> IF LPAREN condition RPAREN block .)
+    IDENTIFIER      reduce using rule 7 (statement -> IF LPAREN condition RPAREN block .)
+    IF              reduce using rule 7 (statement -> IF LPAREN condition RPAREN block .)
+    $end            reduce using rule 7 (statement -> IF LPAREN condition RPAREN block .)
+    RBRACE          reduce using rule 7 (statement -> IF LPAREN condition RPAREN block .)
+    ELSE            shift and go to state 34
+
+
+state 32
+
+    (10) block -> LBRACE . statements RBRACE
+    (2) statements -> . statements statement
+    (3) statements -> . statement
+    (4) statement -> . INT IDENTIFIER SEMICOLON
+    (5) statement -> . INT IDENTIFIER EQUALS expression SEMICOLON
+    (6) statement -> . IDENTIFIER EQUALS expression SEMICOLON
+    (7) statement -> . IF LPAREN condition RPAREN block
+    (8) statement -> . IF LPAREN condition RPAREN block ELSE block
+
+    INT             shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+    IF              shift and go to state 6
+
+    statements                     shift and go to state 35
+    statement                      shift and go to state 3
+
+state 33
+
+    (9) condition -> expression LT expression .
+    (11) expression -> expression . PLUS expression
+    (12) expression -> expression . MINUS expression
+    (13) expression -> expression . TIMES expression
+    (14) expression -> expression . DIVIDE expression
+
+    RPAREN          reduce using rule 9 (condition -> expression LT expression .)
+    PLUS            shift and go to state 20
+    MINUS           shift and go to state 21
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+
+
+state 34
+
+    (8) statement -> IF LPAREN condition RPAREN block ELSE . block
+    (10) block -> . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 32
+
+    block                          shift and go to state 36
+
+state 35
+
+    (10) block -> LBRACE statements . RBRACE
+    (2) statements -> statements . statement
+    (4) statement -> . INT IDENTIFIER SEMICOLON
+    (5) statement -> . INT IDENTIFIER EQUALS expression SEMICOLON
+    (6) statement -> . IDENTIFIER EQUALS expression SEMICOLON
+    (7) statement -> . IF LPAREN condition RPAREN block
+    (8) statement -> . IF LPAREN condition RPAREN block ELSE block
+
+    RBRACE          shift and go to state 37
+    INT             shift and go to state 4
+    IDENTIFIER      shift and go to state 5
+    IF              shift and go to state 6
+
+    statement                      shift and go to state 7
+
+state 36
+
+    (8) statement -> IF LPAREN condition RPAREN block ELSE block .
+
+    INT             reduce using rule 8 (statement -> IF LPAREN condition RPAREN block ELSE block .)
+    IDENTIFIER      reduce using rule 8 (statement -> IF LPAREN condition RPAREN block ELSE block .)
+    IF              reduce using rule 8 (statement -> IF LPAREN condition RPAREN block ELSE block .)
+    $end            reduce using rule 8 (statement -> IF LPAREN condition RPAREN block ELSE block .)
+    RBRACE          reduce using rule 8 (statement -> IF LPAREN condition RPAREN block ELSE block .)
+
+
+state 37
+
+    (10) block -> LBRACE statements RBRACE .
+
+    ELSE            reduce using rule 10 (block -> LBRACE statements RBRACE .)
+    INT             reduce using rule 10 (block -> LBRACE statements RBRACE .)
+    IDENTIFIER      reduce using rule 10 (block -> LBRACE statements RBRACE .)
+    IF              reduce using rule 10 (block -> LBRACE statements RBRACE .)
+    $end            reduce using rule 10 (block -> LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 10 (block -> LBRACE statements RBRACE .)
+
