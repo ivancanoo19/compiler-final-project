@@ -4,7 +4,6 @@ class MemoryManager:
     """Gestiona la asignación de memoria para variables y heap."""
     def __init__(self):
         self.stack_pointer = 0
-        self.heap_pointer = 1000  # Asumimos que el heap empieza en 1000
 
     def allocate_stack(self, var_name):
         """Asigna una dirección en el stack para una variable."""
@@ -12,15 +11,6 @@ class MemoryManager:
         self.stack_pointer += 1
         return address
 
-    def allocate_heap(self, size):
-        """Asigna una dirección en el heap para memoria dinámica."""
-        address = self.heap_pointer
-        self.heap_pointer += size
-        return address
-
-    def free_heap(self, address):
-        """Liberar memoria en el heap (a implementar)."""
-        pass  # Aquí podrías implementar lógica para manejar la liberación de memoria
 
 class SymbolTable:
     """Tabla de símbolos para gestionar información sobre identificadores."""
