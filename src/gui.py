@@ -61,23 +61,25 @@ class CompilerApp:
         self.asm_text = scrolledtext.ScrolledText(asm_frame, height=10, width=80, font=("Consolas", 12), bd=0, relief="flat", state="disabled")
         self.asm_text.pack(padx=10, pady=5)
 
+    
     def compile_code(self):
         """Compila el código ingresado y muestra el IR y el código ensamblador."""
-        input_code = self.input_text.get("1.0", tk.END).strip()
-        if not input_code:
+        input_code = self.input_text.get("1.0", tk.END).strip() # Obtiene el codigo ingresado
+        if not input_code: #En caso de que no se obtenga el codigo
             messagebox.showwarning("Warning", "The text field is empty.")
             return
         
         try:
             print("Starting compilation...")
             # Parsing y Generación del AST
-            parser = build_parser()
-            ast = parser.parse(input_code)
+            parser = build_parser()         # Crea el parser 
+            ast = parser.parse(input_code)  # Crea el arbol de parseo con el  Parser 
             
-            if ast is None:
+            if ast is None: 
                 raise Exception("Parsing failed. Please check your code for syntax errors.")
             
             print("AST generated successfully.")
+            
             memory_manager = MemoryManager()
             symbol_table = SymbolTable(memory_manager)
             

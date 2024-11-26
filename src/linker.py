@@ -1,4 +1,7 @@
 
+# Remplazar etiquetas por direcciones de memoria 
+# Generar archivo binario 
+
 #Esta clase SIMULA la ejecución de el codigo en python
 
 class Linker:
@@ -137,3 +140,5 @@ class Linker:
 
         print("Ejecución completada.")
         print("Estado final de los registros:", self.registers)
+
+>>>>>>> e5f9c5aba053e2c2d26c88ea76ed4ee5bf620fb7
