@@ -9,6 +9,7 @@ from ir_generator import IRGenerator
 from optimizer import optimize_ir
 from code_generator import CodeGenerator
 import os
+import linker
 
 class CompilerApp:
     """Interfaz gráfica para el compilador."""
@@ -117,7 +118,7 @@ class CompilerApp:
             self.auto_save_assembly(assembly_code)
 
             #Genera el codigo objeto 
-            lnkr=Linker(symbol_table.scopes, assembly_code)
+            lnkr=linker.Linker(symbol_table.scopes, assembly_code)
             code_obj = lnkr.generate_code_object()
             print(code_obj)
             
