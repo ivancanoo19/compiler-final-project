@@ -108,34 +108,31 @@ class Linker:
             if opcode == '01':                  # Si el codigo de operación es un 01 es una operación MOV asignación 3 partes
                 reg = parts[1]                  # registro 
                 val = int(parts[2], 16)       # Valor
-                print(f" {reg} <-- {val}")
+                print(f"\t{reg} <-- {val}")
                 self.registers[reg]['value'] = val
             elif opcode == '02':  # SLT reg_dest, [reg_src], value
                 reg_dest = parts[1]                         # donde vamos a guardar el resultado de la op 
                 reg_src = self.registers[parts[2]]['value'] # recuperamos el valor de ese registro 
                 value = int(parts[3], 16)                   # recuperamos el valor 
-                print(f"Comparando {reg_src} < {value}")
+                print(f"\t{reg_src} < {value}= {int(reg_src < value)}")
                 self.registers[reg_dest]['value'] = int(reg_src < value)
-                print(f"{reg_dest} <-- {int(reg_src < value)}")
+                print(f"\t{reg_dest} <-- {int(reg_src < value)}")
 
             elif opcode == '03':  # JZ reg, label
                 reg_value = self.registers[parts[1]]['value']     #Recupera el valor del registro 
                 linea_de_codigo = parts[2]                                  #Recupera la linea de codigo de esa etiqueta
                 if reg_value == 0:                                #Si es igual a cero tiene que saltar
                     self.program_counter = int(linea_de_codigo) - 1  # Salto a la etiqueta
-                    print(f"Salto a linea de codigo {linea_de_codigo}")
+                    print(f"\tjump to{linea_de_codigo}")
                 else:
-                    print(f" No salta")
+                    print(f"\tnot jump")
 
             elif opcode == '04':  # JMP label
                 label = parts[1]
-                if label in self.labels:
-                    self.program_counter = self.labels[label] - 1  # Salto a la etiqueta
-                    print(f"JMP: Salto a {label}")
-                else:
-                    print(f"JMP: Etiqueta no encontrada {label}")
+                self.program_counter = int(label)- 1  # Salto a la etiqueta
+                print(f"\tjump {label}")
 
             self.program_counter += 1  # Incrementar el contador de programa
 
-        print("Ejecución completada.")
-        print("Estado final de los registros:", self.registers)
+        print("\nExecution finish!")
+        print("Final state of registers:", self.registers)

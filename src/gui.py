@@ -119,11 +119,17 @@ class CompilerApp:
 
             #Genera el codigo objeto 
             lnkr=linker.Linker(symbol_table.scopes, assembly_code)
+
+            print("\n--------------------------- Object Code ---------------------------\n")
             code_obj = lnkr.generate_code_object()
-            print(code_obj)
-            
+            for code in code_obj:
+                print (code)
+            print("\n------------------------------------------------------------------\n")
+
             #Ejecuta el codigo
+            print("\n--------------------------- Execution ---------------------------\n")
             lnkr.simulate_execution()
+            print("\n------------------------------------------------------------------\n")
 
         except Exception as e:
             print(f"Compilation Error: {str(e)}")
