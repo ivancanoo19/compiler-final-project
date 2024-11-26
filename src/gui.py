@@ -115,6 +115,15 @@ class CompilerApp:
 
             # Guardar automáticamente el código ensamblador
             self.auto_save_assembly(assembly_code)
+
+            #Genera el codigo objeto 
+            lnkr=Linker(symbol_table.scopes, assembly_code)
+            code_obj = lnkr.generate_code_object()
+            print(code_obj)
+            
+            #Ejecuta el codigo
+            lnkr.simulate_execution()
+
         except Exception as e:
             print(f"Compilation Error: {str(e)}")
             messagebox.showerror("Compilation Error", str(e))
