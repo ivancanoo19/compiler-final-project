@@ -1,7 +1,3 @@
-
-# Remplazar etiquetas por direcciones de memoria 
-# Generar archivo binario 
-
 #Esta clase SIMULA la ejecución de el codigo en python
 
 class Linker:
