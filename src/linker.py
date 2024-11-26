@@ -41,9 +41,12 @@ class Linker:
 
         # Para cada tipo de opecación genero su codigo objeto 
             if instruction['opcode'] == 'MOV':  #MOV REG VALOR 
-                reg = self.get_key_by_name(operands[0][:-1])        # Recupera la dirección de memoria del registro 
-                val_hex = f"{int(operands[1]):04X}"               # Convertir valor a hexadecimal de 4 dígitos
-                self.code_object.append(f"{opcode} {reg} {val_hex}")
+                if operands[0] in self.symbol_table:  # Verificar si es una variable
+                    reg = self.symbol_table[operands[0]]  # Obtener el registro asociado
+                else:
+                    reg = self.get_key_by_name(operands[0][:-1])  # Si no es variable, obtener por registro directo
+                    val_hex = f"{int(operands[1]):04X}"  # Convertir valor a hexadecimal
+                    self.code_object.append(f"{opcode} {reg} {val_hex}")
 
             elif instruction['opcode'] == 'SLT':  # SLT R, [R], VALOR
                 reg_dest = self.get_key_by_name(operands[0][:-1])
